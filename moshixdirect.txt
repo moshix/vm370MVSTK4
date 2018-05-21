@@ -1,0 +1,219 @@
+USERID MAINT
+* CHANGE THE NEXT ENTRY FOR YOUR SYSTEM RESIDENCE DEVICE                VM500010
+DIRECTORY 231 3350 VM50-1                                               VM500020
+*                                                                       VM500030
+*                                                                       VM500040
+* BELOW ARE THE LOCKED OUT AREAS FOR EASE OF MAPPING. IT MARKS THINGS   VM500050
+* SUCH AS THE PERM AREA USED BY DMKSNT - THE AREA FOR TEMP MINIDISKS (TDVM500060
+* AND ALSO THE SPOOL/PAGE AREA (TEMP). THE DIRECTORY AREA IS ALSO MAPPEDVM500070
+* OUT THIS WAY. USING THE PASSWORD OF "NOLOG" STOPS THEM BEING LOGGED   VM500080
+* ON TO AS WELL.                                                        VM500090
+*                                                                       VM500100
+*                                                                       VM500110
+USER TDSK NOLOG                                                         VM500120
+ MDISK 100 3350 070 029 VM50-1 R                                        VM500130
+ MDISK 102 3350 510 040 VM50-2 R                                        VM500140
+ MDISK 103 3350 001 100 VM50-3 R                                        VM500150
+                                                                        VM500160
+                                                                        VM500170
+                                                                        VM500180
+USER TEMP NOLOG                                                         VM500190
+ MDISK 100 3350 020 049 VM50-1 R                                        VM500200
+ MDISK 101 3350 466 044 VM50-2 R                                        VM500210
+ MDISK 102 3350 101 100 VM50-3 R                                        VM500220
+                                                                        VM500230
+                                                                        VM500240
+                                                                        VM500250
+ USER PERM NOLOG                                                        VM500260
+* SYSTEM AREA'S IN 101                                                  VM500270
+* DIRECT IN 102                                                         VM500280
+* NUC/CKPT/ERROR/WARM IN 103                                            VM500290
+*                                                                       VM500300
+ MDISK 101 3350 000 010 VM50-1 R                                        VM500310
+ MDISK 102 3350 011 002 VM50-1 R                                        VM500320
+ MDISK 103 3350 530 014 VM50-1 R                                        VM500330
+                                                                        VM500340
+USER OPERATOR OPERATOR 2M 16M ABCDEFGH                                  VM500350
+ ACCOUNT OPERATOR OPERATOR                                              VM500360
+ IPL CMS PARM AUTOCR                                                    VM500370
+ CONSOLE 009 3215                                                       VM500380
+ SPOOL 00C 2540 READ A                                                  VM500390
+ SPOOL 00D 2540 PUNCH A                                                 VM500400
+ SPOOL 00E 1403 A                                                       VM500410
+ MDISK 191 3350 100 003 VM50-1 WR READ WRITE ALL                        VM500420
+ LINK MAINT 194 194 RR                                                  VM500430
+ LINK MAINT 190 190 RR                                                  VM500440
+*                                                                       VM500450
+*                                                                       VM500460
+USER MAINT CPCMS 4M 16M ABCDEFGH                                        VM500470
+ ACCOUNT MAINT MAINT                                                    VM500480
+ OPTION ECMODE REALTIMER                                                VM500490
+ IPL CMS PARM AUTOCR                                                    VM500500
+ CONSOLE 009 3215                                                       VM500510
+ SPOOL 00C 2540 READ A                                                  VM500520
+ SPOOL 00D 2540 PUNCH A                                                 VM500530
+ SPOOL 00E 1403 A                                                       VM500540
+ MDISK 190 3350 103 061 VM50-1 MR READ WRITE ALL                        VM500550
+ MDISK 299 3350 164 014 VM50-1 WR READ WRITE ALL                        VM500560
+ MDISK 194 3350 178 035 VM50-1 MR READ WRITE ALL                        VM500570
+ MDISK 193 3350 213 035 VM50-1 MR READ WRITE ALL                        VM500580
+ MDISK 393 3350 248 085 VM50-1 MR READ WRITE ALL                        VM500590
+ MDISK 294 3350 333 035 VM50-1 MR READ WRITE ALL                        VM500600
+ MDISK 394 3350 368 110 VM50-1 MR READ WRITE ALL                        VM500610
+ MDISK 191 3350 478 035 VM50-1 MR READ WRITE ALL                        VM500620
+* 19D AND 19E ARE ON NEXT PACK. ALL IMPORTANT STUFF FOR MAINT IS ON     VM500630
+* THE SINGLE PACK TO MAKE IT EASIER TO "ROLL YOUR OWN" SYSTEM.          VM500640
+ MDISK 19D 3350 001 070 VM50-2 MR READ WRITE ALL                        VM500650
+ MDISK 19E 3350 071 070 VM50-2 MR READ WRITE ALL                        VM500660
+*                                                                       VM500670
+*                                                                       VM500680
+* PACK MAP DISKS FOR DUMPS - BUILDING THE SYSTEM ETC.                   VM500690
+*                                                                       VM500700
+                                                                        VM500710
+ MDISK 231 3350 000 554 VM50-1 MW                                       VM500720
+ MDISK 232 3350 000 554 VM50-2 MW                                       VM500730
+ MDISK 233 3350 000 554 VM50-3 MW                                       VM500740
+ MDISK 234 3350 000 554 VM50-4 MW                                       VM500750
+*                                                                       VM500760
+*                                                                       VM500770
+*****                                                                   VM500780
+USER RSCS RSCS 2M 16M                                                   VM500790
+ ACCOUNT RSCS RSCS                                                      VM500800
+IPL CMS                                                                 VM500810
+ OPTION ECMODE                                                          VM500820
+ CONSOLE 009 3215                                                       VM500830
+ SPOOL 001 2540 READ A                                                  VM500840
+ SPOOL 00C 2540 READ A                                                  VM500850
+ SPOOL 00D 2540 PUNCH A                                                 VM500860
+ SPOOL 00E 1403 A                                                       VM500870
+ MDISK 191 3350 141 005 VM50-2 WR READ WRITE ALL                        VM500880
+ MDISK 192 3350 146 015 VM50-2 WR READ WRITE ALL                        VM500890
+ LINK MAINT 190 190 RR                                                  VM500900
+ LINK MAINT 194 194 RR                                                  VM500910
+ DEDICATE 0B1 078                                                       VM500920
+ DEDICATE 0B2 079                                                       VM500930
+ DEDICATE 0B3 07A                                                       VM500940
+*                                                                       VM500950
+USER RSCS1 RSCS1 2M 16M G                                               VM500960
+OPTION ECMODE                                                           VM500970
+IPL 191 PARM AUTOCR                                                     VM500980
+CONSOLE 009 3215                                                        VM500990
+MDISK 191 3350 161 005 VM50-2 MR READ WRITE ALL                         VM501000
+MDISK 192 3350 166 015 VM50-2 MR READ WRITE ALL                         VM501010
+LINK MAINT 190 190 RR                                                   VM501020
+LINK MAINT 194 194 RR                                                   VM501030
+                                                                        VM501040
+                                                                        VM501050
+                                                                        VM501060
+USER CPWATCH CPWATCH 4M 4M EG                                           VM501070
+OPTION ECMODE                                                           VM501080
+IPL CMS PARM AUTOCR                                                     VM501090
+MDISK 191 3350 181 010 VM50-2 MW READ WRITE ALL                         VM501100
+CONSOLE 009 3215                                                        VM501110
+SPOOL 00C 2540 READ A                                                   VM501120
+SPOOL 00D 2540 PUNCH A                                                  VM501130
+SPOOL 00E 1403 A                                                        VM501140
+LINK MAINT 190 190 RR                                                   VM501150
+LINK MAINT 194 192 RR                                                   VM501160
+LINK MAINT 19E 19E RR                                                   VM501170
+                                                                        VM501180
+USER MVS MVS 8M 16M BFG   
+OPTION ECMODE VIRT=REAL 
+*IPL 148                
+SPOOL 00C 2540 READ A   
+SPOOL 00D 2540 PUNCH A  
+SPOOL 00E 1403 A 
+SPECIAL 009 3270
+SPECIAL 011 3270    
+SPECIAL 0C1 3270    
+SPECIAL 0C2 3270    
+SPECIAL 0C3 3270    
+SPECIAL 0C4 3270 
+SPECIAL 0C5 3270
+* DEDICATE TAPE DRIVE       
+*DEDICATE 00F 00F         
+*DEDICATE 30E 30E     
+DEDICATE 480 480              
+* DEDICATE DASD                 
+DEDICATE 152 152
+DEDICATE 191 191
+DEDICATE 248 248
+DEDICATE 148 148 
+DEDICATE 160 160
+DEDICATE 161 161
+DEDICATE 240 240
+DEDICATE 241 241
+DEDICATE 270 270
+DEDICATE 271 271
+DEDICATE 280 280
+DEDICATE 281 281
+DEDICATE 290 290
+DEDICATE 291 291
+DEDICATE 149 149
+DEDICATE 14A 14A
+DEDICATE 14B 14B
+DEDICATE 14C 14C
+DEDICATE 131 131
+DEDICATE 132 132
+DEDICATE 133 133
+DEDICATE 134 134
+DEDICATE 135 135
+DEDICATE 136 136
+DEDICATE 140 140
+DEDICATE 170 170
+DEDICATE 180 180
+DEDICATE 190 190                                 
+*                                                               
+USER AUTOLOG1 AUTOLOG1 2M 16M ABCDEFGH                                  VM501790
+IPL CMS                                                                 VM501800
+CONSOLE 01F 3215                                                        VM501810
+LINK MAINT 190 190 RR                                                   VM501820
+LINK MAINT 19E 19E RR                                                   VM501830
+MDISK 191 3350 191 005 VM50-2 MR READ WRITE ALL                         VM501840
+SPOOL 00C 2540 READ A                                                   VM501850
+SPOOL 00D 2540 PUNCH A                                                  VM501860
+SPOOL 00E 1403 A                                                        VM501870
+*                                                                       VM501880
+USER COBOL COBOL 8M 8M G                                                VM501890
+OPTION ECMODE REALTIMER                                                 VM501900
+CONSOLE 01F 3215                                                        VM501910
+SPOOL 00C 2540 READ A                                                   VM501920
+SPOOL 00D 2540 PUNCH A                                                  VM501930
+SPOOL 00E 1403 A                                                        VM501940
+LINK MAINT 190 190 MR                                                   VM501950
+MDISK 191 3350 196 105 VM50-2 MR READ WRITE ALL                         VM501960
+*                                                                       VM501970
+USER OSBASIC OSBASIC 8M 8M G                                            VM501980
+MDISK 191 3350 301 014 VM50-2 MR READ WRITE ALL                         VM501990
+*                                                                       VM502000
+USER SCRIPT SCRIPT 8M 8M G                                              VM502010
+MDISK 191 3350 315 035 VM50-2 MR READ WRITE ALL                         VM502020
+*                                                                       VM502030
+USER PLI PLI 8M 8M G                                                    VM502040
+MDISK 191 3350 350 025 VM50-2 MR READ WRITE ALL                         VM502050
+*                                                                       VM502060
+USER TAPEMAP TAPEMAP 2M 10M G                                           VM502070
+MDISK 191 3350 375 035 VM50-2 MR READ WRITE ALL                         VM502080
+*                                                                       VM502090
+USER ALGOL ALGOL 2M 2M G                                                VM502100
+MDISK 191 3350 410 020 VM50-2 MR READ WRITE ALL                         VM502110
+*                                                                       VM502120
+USER RPG RPG 2M 2M G                                                    VM502130
+MDISK 191 3350 430 035 VM50-2 MR READ WRITE ALL                         VM502140
+*                                                                       VM502150
+USER OS360MAC OS360MAC 2M 2M G                                          VM502160
+MDISK 191 3350 221 020 VM50-3 MR READ WRITE ALL                         VM502170
+*                                                                       VM502180
+USER PL360 PL360 2M 2M G                                                VM502190
+MDISK 191 3350 201 020 VM50-3 MR READ WRITE ALL                         VM502200
+*                                                                       VM502210
+USER CMSBATCH CMSBATCH 8M 8M G                                          VM502220
+IPL CMS PARM BATCH                                                      VM502230
+CONSOLE 01F 3215                                                        VM502240
+SPOOL 00E 1403 A                                                        VM502250
+SPOOL 00C 2540 READ *                                                   VM502260
+SPOOL 00D 2540 PUNCH A                                                  VM502270
+MDISK 192 3350 241 010 VM50-3 MR READ WRITE ALL                         VM502280
+MDISK 195 3350 251 050 VM50-3 MR READ WRITE ALL                         VM502290
+LINK MAINT 190 190 RR                                                   VM502300
+
